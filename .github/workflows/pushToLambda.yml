@@ -22,7 +22,7 @@ jobs:
       - name: Create ZIP Folder
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./bundle.zip ./src
+          args: zip -qq -r ./bundle.zip ./src/
       - name: Deploy to AWS
         uses: appleboy/lambda-action@master
         with:
