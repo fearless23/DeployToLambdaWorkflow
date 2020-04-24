@@ -19,10 +19,19 @@ jobs:
       #     npm run build --if-present
       #   env:
       #     CI: true
+      # - name: Create ZIP Folder
+      #   uses: montudor/action-zip@v0.1.0
+      #   with:
+      #     args: zip -qq -r ./bundle.zip ./src/*
       - name: Create ZIP Folder
-        uses: montudor/action-zip@v0.1.0
+        uses: papeloto/action-zip@v1
         with:
-          args: zip -qq -r ./bundle.zip ./src/*
+          # Files or directories to zip
+          files: ./src/*
+          # Name of output zip file
+          # dest: # optional, default is result.zip
+          # Whether to add subdirectories to simply zip all files to the root
+          # recursive: # optional, default is true
       - name: Deploy to AWS
         uses: appleboy/lambda-action@master
         with:
@@ -30,4 +39,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ap-south-1
           function_name: pushFromGithub
-          zip_file: bundle.zip
+          zip_file: result.zip
