@@ -22,7 +22,7 @@ jobs:
       - name: Create ZIP Folder
         uses: montudor/action-zip@v0.1.0
         with:
-          args: zip -qq -r ./bundle.zip ./src/
+          args: cd src && zip -qq -r ./bundle.zip ./
       - name: Deploy to AWS
         uses: appleboy/lambda-action@master
         with:
@@ -30,4 +30,4 @@ jobs:
           aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws_region: ap-south-1
           function_name: pushFromGithub
-          zip_file: bundle.zip
+          zip_file: ./src/bundle.zip
